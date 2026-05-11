@@ -1,0 +1,24 @@
+name: lms_task_app
+description: "Aplikasi Dashboard Tugas (LMS) - Proyek Praktikum Flutter Modul 3. Didesain dengan pendekatan modular dan UI ala Notion."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+
+  uses-material-design: true

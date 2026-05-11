@@ -1,0 +1,40 @@
+# Build
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# Generated
+generated/
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Android
+android/app/release
+android/.gradle/
+android/app/debug
+android/app/profile
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+# Logs
+*.log
+
+# Env
+.env
+
+# AI Context
+ai_context/
+
+# Misc
+.DS_Store
+Thumbs.db
