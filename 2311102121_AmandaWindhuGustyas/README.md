@@ -89,625 +89,429 @@ Aplikasi ini dibuat menggunakan Flutter dengan memanfaatkan GridView dan ListVie
 
 ```dart
 import 'package:flutter/material.dart';
-import 'home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const TelULmsApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class TelULmsApp extends StatelessWidget {
+  const TelULmsApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'LMS Kampus',
       debugShowCheckedModeBanner: false,
+      title: "My Tel-U LMS",
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1A73E8)),
-        useMaterial3: true,
-        fontFamily: 'Segoe UI',
+        fontFamily: 'Roboto',
       ),
       home: const HomePage(),
     );
   }
 }
-```
-
----
-
-### b. File `task_model.dart`
-
-```dart
-class Task {
-  final String taskName;
-  final String subject;
-  final String deadline;
-  final int daysLeft;
-  final String status;
-  final String priority;
-  final String description;
-
-  Task({
-    required this.taskName,
-    required this.subject,
-    required this.deadline,
-    required this.daysLeft,
-    required this.status,
-    required this.priority,
-    required this.description,
-  });
-}
-
-// Data dummy tugas
-final List<Task> allTasks = [
-  Task(
-    taskName: 'Laporan Modul 14',
-    subject: 'Aplikasi Berbasis Platform',
-    deadline: '12 Mei 2026',
-    daysLeft: 1,
-    status: 'Belum Dikerjakan',
-    priority: 'Tinggi',
-    description: 'Buat laporan praktikum Flutter GridView & ListView',
-  ),
-  Task(
-    taskName: 'Quiz Chapter 5',
-    subject: 'Pemrograman Berorientasi Objek',
-    deadline: '13 Mei 2026',
-    daysLeft: 2,
-    status: 'Sedang Dikerjakan',
-    priority: 'Tinggi',
-    description: 'Quiz materi inheritance dan polymorphism',
-  ),
-  Task(
-    taskName: 'Tugas Analisis Algoritma',
-    subject: 'Analisis Algoritma',
-    deadline: '15 Mei 2026',
-    daysLeft: 4,
-    status: 'Belum Dikerjakan',
-    priority: 'Sedang',
-    description: 'Analisis kompleksitas algoritma sorting',
-  ),
-  Task(
-    taskName: 'Presentasi UX Design',
-    subject: 'Desain Pengalaman Pengguna',
-    deadline: '16 Mei 2026',
-    daysLeft: 5,
-    status: 'Sedang Dikerjakan',
-    priority: 'Sedang',
-    description: 'Presentasi hasil prototype aplikasi mobile',
-  ),
-  Task(
-    taskName: 'Laporan Praktikum Jaringan',
-    subject: 'Jaringan Komputer',
-    deadline: '17 Mei 2026',
-    daysLeft: 6,
-    status: 'Belum Dikerjakan',
-    priority: 'Sedang',
-    description: 'Laporan konfigurasi VLAN dan routing',
-  ),
-  Task(
-    taskName: 'Mini Project Database',
-    subject: 'Sistem Basis Data',
-    deadline: '18 Mei 2026',
-    daysLeft: 7,
-    status: 'Belum Dikerjakan',
-    priority: 'Tinggi',
-    description: 'Buat skema database toko online lengkap',
-  ),
-  Task(
-    taskName: 'Resume Paper AI',
-    subject: 'Kecerdasan Buatan',
-    deadline: '19 Mei 2026',
-    daysLeft: 8,
-    status: 'Selesai',
-    priority: 'Rendah',
-    description: 'Resume paper tentang machine learning terbaru',
-  ),
-  Task(
-    taskName: 'Ujian Tengah Semester',
-    subject: 'Matematika Diskrit',
-    deadline: '20 Mei 2026',
-    daysLeft: 9,
-    status: 'Belum Dikerjakan',
-    priority: 'Tinggi',
-    description: 'UTS materi graf, pohon, dan kombinatorika',
-  ),
-  Task(
-    taskName: 'Studi Kasus Keamanan Sistem',
-    subject: 'Keamanan Sistem Informasi',
-    deadline: '21 Mei 2026',
-    daysLeft: 10,
-    status: 'Belum Dikerjakan',
-    priority: 'Sedang',
-    description: 'Analisis kasus serangan SQL Injection',
-  ),
-  Task(
-    taskName: 'Proyek Akhir Semester',
-    subject: 'Rekayasa Perangkat Lunak',
-    deadline: '30 Mei 2026',
-    daysLeft: 19,
-    status: 'Sedang Dikerjakan',
-    priority: 'Tinggi',
-    description: 'Pengembangan aplikasi manajemen tugas kampus',
-  ),
-];
-
-// 2 tugas dengan deadline terdekat (untuk GridView)
-List<Task> get urgentTasks => allTasks
-    .where((t) => t.status != 'Selesai')
-    .toList()
-  ..sort((a, b) => a.daysLeft.compareTo(b.daysLeft))
-  ..sublist(0, 2);
-
-// 8 tugas berikutnya (untuk ListView, di luar 2 urgent)
-List<Task> get listTasks {
-  final urgent = urgentTasks;
-  final rest = allTasks.where((t) => !urgent.contains(t)).toList();
-  return rest.take(8).toList();
-}
-```
-
----
-
-### c. File `home_page.dart`
-
-```dart
-import 'package:flutter/material.dart';
-import 'task_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  Color _priorityColor(String priority) {
-    switch (priority) {
-      case 'Tinggi':
-        return const Color(0xFFD32F2F);
-      case 'Sedang':
-        return const Color(0xFFF57C00);
-      default:
-        return const Color(0xFF388E3C);
-    }
-  }
-
-  Color _statusColor(String status) {
-    switch (status) {
-      case 'Selesai':
-        return const Color(0xFF388E3C);
-      case 'Sedang Dikerjakan':
-        return const Color(0xFF1A73E8);
-      default:
-        return const Color(0xFF757575);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final urgent = urgentTasks;
-    final listed = listTasks;
+
+    // GRIDVIEW DATA
+    final List<Map<String, dynamic>> deadlineUtama = [
+      {
+        "matkul": "Computer Vision",
+        "tugas": "Deteksi Objek YOLO",
+        "jam": "23:59",
+        "warna": const Color(0xff6C63FF),
+        "icon": Icons.remove_red_eye,
+      },
+      {
+        "matkul": "Enterprise System",
+        "tugas": "Analisis ERP",
+        "jam": "20:00",
+        "warna": const Color(0xff00B894),
+        "icon": Icons.business_center,
+      },
+    ];
+
+    // LISTVIEW DATA
+    final List<Map<String, dynamic>> semuaTugas = [
+      {
+        "nama": "Resume Materi",
+        "matkul": "Blockchain",
+        "deadline": "13 Mei 2026",
+        "status": "Belum Dikumpulkan"
+      },
+      {
+        "nama": "Prototype Mobile",
+        "matkul": "Human Computer Interaction",
+        "deadline": "14 Mei 2026",
+        "status": "On Progress"
+      },
+      {
+        "nama": "Tugas Clustering",
+        "matkul": "Data Science",
+        "deadline": "15 Mei 2026",
+        "status": "Belum Mulai"
+      },
+      {
+        "nama": "Video Presentasi",
+        "matkul": "Digital Business",
+        "deadline": "16 Mei 2026",
+        "status": "Sudah Upload"
+      },
+      {
+        "nama": "Laporan Docker",
+        "matkul": "Cloud Infrastructure",
+        "deadline": "17 Mei 2026",
+        "status": "On Review"
+      },
+      {
+        "nama": "Mini Quiz",
+        "matkul": "Cyber Security",
+        "deadline": "18 Mei 2026",
+        "status": "Belum Dikerjakan"
+      },
+      {
+        "nama": "Design Thinking",
+        "matkul": "Startup Technology",
+        "deadline": "19 Mei 2026",
+        "status": "In Progress"
+      },
+      {
+        "nama": "API Testing",
+        "matkul": "Software Quality Assurance",
+        "deadline": "20 Mei 2026",
+        "status": "Belum Upload"
+      },
+    ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F6FB),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF1A73E8),
-        foregroundColor: Colors.white,
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'LMS Kampus',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            Text(
-              'Halo, Naya 👋',
-              style: TextStyle(fontSize: 12, color: Colors.white70),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 12),
-            child: CircleAvatar(
-              backgroundColor: Colors.white24,
-              child: Icon(Icons.person, color: Colors.white, size: 20),
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ── SECTION: DEADLINE TERDEKAT ──
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-              child: Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD32F2F),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    '🔥 Deadline Terdekat',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1A1A2E),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
+      backgroundColor: const Color(0xffEEF2F7),
 
-            // ── GRIDVIEW 2 KOLOM ──
-            GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: 0.9,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: urgent.map((task) => _buildUrgentCard(task)).toList(),
-            ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(18),
 
-            const SizedBox(height: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-            // ── SECTION: SEMUA TUGAS ──
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-              child: Row(
+              // HEADER
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 4,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF1A73E8),
-                          borderRadius: BorderRadius.circular(2),
+
+                      Text(
+                        "My Courses",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      const Text(
-                        '📋 Daftar Tugas',
+
+                      SizedBox(height: 5),
+
+                      Text(
+                        "LMS Telkom University",
                         style: TextStyle(
+                          color: Colors.grey,
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1A1A2E),
                         ),
                       ),
                     ],
                   ),
-                  Text(
-                    '${listed.length} tugas',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF757575),
+
+                  CircleAvatar(
+                    radius: 28,
+                    backgroundColor: Colors.red.shade200,
+                    child: const Icon(
+                      Icons.person,
+                      size: 30,
+                      color: Colors.white,
                     ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 8),
 
-            // ── LISTVIEW.SEPARATED ──
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: listed.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 8),
-              itemBuilder: (context, index) {
-                final task = listed[index];
-                return _buildTaskListItem(task, index);
-              },
-            ),
+              const SizedBox(height: 25),
 
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // ── WIDGET: CARD GRID (URGENT) ──
-  Widget _buildUrgentCard(Task task) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: task.daysLeft <= 1
-              ? [const Color(0xFFD32F2F), const Color(0xFFFF5252)]
-              : [const Color(0xFFF57C00), const Color(0xFFFFB74D)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: (task.daysLeft <= 1
-                    ? const Color(0xFFD32F2F)
-                    : const Color(0xFFF57C00))
-                .withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(14),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.25),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              '⏰ ${task.daysLeft} hari lagi',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            task.taskName,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            task.subject,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.85),
-              fontSize: 11,
-            ),
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              const Icon(Icons.calendar_today, color: Colors.white70, size: 12),
-              const SizedBox(width: 4),
-              Expanded(
-                child: Text(
-                  task.deadline,
-                  style: const TextStyle(color: Colors.white70, fontSize: 11),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── WIDGET: ITEM LISTVIEW ──
-  Widget _buildTaskListItem(Task task, int index) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 6,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Nomor urut
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                color: const Color(0xFF1A73E8).withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                '${index + 1}',
-                style: const TextStyle(
-                  color: Color(0xFF1A73E8),
+              // TITLE
+              const Text(
+                "Urgent Assignment",
+                style: TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  fontSize: 13,
                 ),
               ),
-            ),
-            const SizedBox(width: 12),
 
-            // Konten tugas
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Nama tugas
-                  Text(
-                    task.taskName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      color: Color(0xFF1A1A2E),
-                    ),
+              const SizedBox(height: 15),
+
+              // GRIDVIEW BUILDER
+              SizedBox(
+                height: 190,
+                child: GridView.builder(
+                  itemCount: deadlineUtama.length,
+                  physics: const NeverScrollableScrollPhysics(),
+
+                  gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 0.95,
                   ),
-                  const SizedBox(height: 4),
 
-                  // Mata kuliah
-                  Row(
-                    children: [
-                      const Icon(Icons.school_outlined,
-                          size: 13, color: Color(0xFF757575)),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: Text(
-                          task.subject,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF757575),
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                  itemBuilder: (context, index) {
+
+                    final data = deadlineUtama[index];
+
+                    return Container(
+                      padding: const EdgeInsets.all(18),
+
+                      decoration: BoxDecoration(
+                        color: data["warna"],
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
 
-                  // Deskripsi
-                  Text(
-                    task.description,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF9E9E9E),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                      child: Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
 
-                  // Baris bawah: deadline + status + prioritas
-                  Wrap(
-                    spacing: 6,
-                    runSpacing: 4,
-                    children: [
-                      // Deadline
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.access_time,
-                              size: 12, color: Color(0xFF9E9E9E)),
-                          const SizedBox(width: 3),
+
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Icon(
+                              data["icon"],
+                              color: Colors.white,
+                              size: 35,
+                            ),
+                          ),
+
                           Text(
-                            task.deadline,
+                            data["matkul"],
                             style: const TextStyle(
-                              fontSize: 11,
-                              color: Color(0xFF9E9E9E),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+
+                          Text(
+                            data["tugas"],
+                            style: const TextStyle(
+                              color: Colors.white70,
+                            ),
+                          ),
+
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+
+                            decoration: BoxDecoration(
+                              color: Colors.white24,
+                              borderRadius:
+                                  BorderRadius.circular(15),
+                            ),
+
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+
+                                const Icon(
+                                  Icons.timer,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+
+                                const SizedBox(width: 5),
+
+                                Text(
+                                  data["jam"],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-
-                      // Status
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: _statusColor(task.status).withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color:
-                                _statusColor(task.status).withOpacity(0.4),
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          task.status,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: _statusColor(task.status),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-
-                      // Prioritas
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(
-                          color:
-                              _priorityColor(task.priority).withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: _priorityColor(task.priority)
-                                .withOpacity(0.4),
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          '🚩 ${task.priority}',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: _priorityColor(task.priority),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            // Sisa hari (kanan)
-            Column(
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: task.daysLeft <= 3
-                        ? const Color(0xFFD32F2F).withOpacity(0.1)
-                        : const Color(0xFF1A73E8).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        '${task.daysLeft}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: task.daysLeft <= 3
-                              ? const Color(0xFFD32F2F)
-                              : const Color(0xFF1A73E8),
-                        ),
-                      ),
-                      Text(
-                        'hari',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: task.daysLeft <= 3
-                              ? const Color(0xFFD32F2F)
-                              : const Color(0xFF1A73E8),
-                        ),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-              ],
-            ),
-          ],
+              ),
+
+              const SizedBox(height: 20),
+
+              const Text(
+                "Upcoming Task",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              // LISTVIEW BUILDER
+              Expanded(
+                child: ListView.separated(
+
+                  itemCount: semuaTugas.length,
+
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 12),
+
+                  itemBuilder: (context, index) {
+
+                    final tugas = semuaTugas[index];
+
+                    return Container(
+                      padding: const EdgeInsets.all(16),
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+
+                      child: Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                        children: [
+
+                          Row(
+                            children: [
+
+                              Container(
+                                padding:
+                                    const EdgeInsets.all(10),
+
+                                decoration: BoxDecoration(
+                                  color: Colors.blue.shade50,
+                                  borderRadius:
+                                      BorderRadius.circular(12),
+                                ),
+
+                                child: Icon(
+                                  Icons.folder_copy,
+                                  color: Colors.blue.shade700,
+                                ),
+                              ),
+
+                              const SizedBox(width: 12),
+
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+
+                                    Text(
+                                      tugas["nama"],
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight:
+                                            FontWeight.bold,
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 4),
+
+                                    Text(
+                                      tugas["matkul"],
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              const Icon(
+                                Icons.more_vert,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 15),
+
+                          Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+
+                            children: [
+
+                              Row(
+                                children: [
+
+                                  const Icon(
+                                    Icons.date_range,
+                                    size: 18,
+                                    color: Colors.grey,
+                                  ),
+
+                                  const SizedBox(width: 5),
+
+                                  Text(
+                                    tugas["deadline"],
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+
+                                decoration: BoxDecoration(
+                                  color: Colors.orange.shade100,
+                                  borderRadius:
+                                      BorderRadius.circular(20),
+                                ),
+
+                                child: Text(
+                                  tugas["status"],
+                                  style: TextStyle(
+                                    color:
+                                        Colors.orange.shade900,
+                                    fontWeight:
+                                        FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
 ```
 
 ---
