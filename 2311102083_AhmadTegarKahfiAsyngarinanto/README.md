@@ -93,7 +93,7 @@ Data tugas disimpan menggunakan struktur List<Map<String, dynamic>> yang mampu m
 
 Data inilah yang nantinya menjadi sumber tampilan pada GridView maupun ListView seperti terlihat pada Gambar 2.1.
 
-![Bukti](assets/classAssignment.png)
+![Bukti](Assets/classAssignment.png)
 
 Gambar 2.1 Struktur Data Tugas yang Digunakan
 
@@ -103,7 +103,7 @@ GridView.builder diimplementasikan untuk menampilkan dua tugas dengan prioritas 
 
 Setiap card dalam grid memuat informasi nama tugas, mata kuliah asal, serta batas waktu pengumpulan seperti ditunjukkan pada Gambar 2.2.
 
-![Bukti](assets/GridViewBuilder.png)
+![Bukti](Assets/GridViewBuilder.png)
 
 Gambar 2.2 Implementasi GridView.builder
 
@@ -111,7 +111,7 @@ Gambar 2.2 Implementasi GridView.builder
 
 ListView.separated digunakan untuk menampilkan daftar tugas lainnya yang berada di bawah bagian GridView. Penggunaan varian separated memberikan garis pemisah otomatis antar item sehingga daftar terlihat lebih teratur dan nyaman dibaca seperti pada Gambar 2.3.
 
-![Bukti](assets/ListViewSeparated.png)
+![Bukti](Assets/ListViewSeparated.png)
 
 Gambar 2.3 Implementasi ListView.separated
 
@@ -119,7 +119,7 @@ Gambar 2.3 Implementasi ListView.separated
 
 Tampilan keseluruhan aplikasi menggunakan widget Card agar setiap informasi tugas tersaji dalam kotak yang bersih dan modern. Pembedaan warna pada setiap card digunakan sebagai indikator visual tingkat prioritas tugas seperti ditunjukkan pada Gambar 2.4.
 
-![Bukti](assets/image.png)
+![Bukti](Assets/image.png)
 
 Gambar 2.4 Tampilan Akhir Aplikasi pada Emulator
 
