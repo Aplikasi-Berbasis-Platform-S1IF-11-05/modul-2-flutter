@@ -40,9 +40,9 @@
 ## 1. ListView
 
 ListView adalah widget di Flutter yang menampilkan daftar item secara berurutan, baik secara vertikal maupun horizontal. ListView lebih cocok digunakan ketika jumlah item bersifat dinamis atau dalam jumlah besar.
-
 Terdapat beberapa varian ListView yang dapat digunakan sesuai kebutuhan. `ListView.builder` membuat item secara lazy, artinya hanya item yang tampil di layar yang dirender sehingga performa lebih optimal untuk daftar panjang. `ListView.separated` mirip dengan builder namun menambahkan pemisah antar item secara otomatis menggunakan parameter `separatorBuilder`, sehingga tampilan daftar lebih rapi dan terorganisir. Pada tugas ini, ListView digunakan untuk menampilkan delapan daftar tugas mata kuliah di bawah bagian grid.
----
+
+**---
 
 
 ## 2. Flutter
@@ -542,6 +542,7 @@ Secara keseluruhan, aplikasi ini sudah mampu menampilkan data secara terstruktur
 
 
 # Output
+<img width="1920" height="1080" alt="Mobile-LMS-Hasil" src="https://github.com/user-attachments/assets/f574eb9e-1b21-4f21-9c6a-9c54c711918e" />
 
 
 
@@ -549,5 +550,5 @@ Secara keseluruhan, aplikasi ini sudah mampu menampilkan data secara terstruktur
 
 <div align="center">
   <p>© 2026 Amelia Azmi — 2311102135 | S1 IF-11-REG05</p>
-  <p>Universitas Telkom Purwokerto 💙</p>
+  <p>Universitas Telkom Purwokerto </p>
 </div>
