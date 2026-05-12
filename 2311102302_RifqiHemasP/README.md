@@ -420,6 +420,7 @@ class DashboardPage extends StatelessWidget {
   }
 }
 ```
+
 ---
 ###Penjelaasan Program
 ### Rincian Komponen dan Logika Kode
@@ -442,7 +443,8 @@ Di dalam *card* daftar tugas (ListView), digunakan kombinasi `Row` dan `Column`:
 **4. Interaktivitas Tombol**
 Pada setiap baris di bagian "Daftar Tugas", terdapat `ElevatedButton` bertuliskan "Open". Saat ini properti `onPressed: () {}` masih dibiarkan kosong karena fokus pada modul ini adalah pembentukan layout (UI). Ke depannya, fungsi ini dapat diisi dengan navigasi (seperti `Navigator.push`) untuk berpindah ke halaman detail tugas terkait.
 
-
+# Output
+<img src="{26FAD65E-42A3-4CDD-AC4F-3CB6A675EC0E}.png" alt="Screenshot Output" width="800" />
 
 ---
 
