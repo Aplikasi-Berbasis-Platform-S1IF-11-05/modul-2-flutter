@@ -154,8 +154,16 @@ const List<TaskItem> otherTasks = [
 ```
 
 ### Screenshot Output
-<img src="assets/halamanUtama.png" alt="Keterangan Foto" width="100%">
-<img src="assets/halaman2.png" alt="Keterangan Foto" width="100%">
+<table>
+  <tr>
+    <td width="50%">
+      <img src="assets/halamanUtama.png" alt="Keterangan Foto" width="100%">
+    </td>
+    <td width="50%">
+      <img src="assets/halaman2.png" alt="Keterangan Foto" width="100%">
+    </td>
+  </tr>
+</table>
 
 ### Penjelasan Code
 
