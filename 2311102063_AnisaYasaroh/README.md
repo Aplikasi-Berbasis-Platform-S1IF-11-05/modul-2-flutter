@@ -41,7 +41,7 @@ Dalam Flutter terdapat dua jenis widget utama, yaitu `StatelessWidget` dan `Stat
 
 Pada praktikum ini aplikasi dibuat menggunakan widget `MaterialApp` sebagai struktur utama aplikasi dan `Scaffold` sebagai kerangka tampilan halaman. Widget `AppBar` digunakan untuk membuat bagian header aplikasi, sedangkan `GridView.builder` digunakan untuk menampilkan daftar tugas prioritas dalam bentuk grid dan `ListView.separated` digunakan untuk menampilkan daftar seluruh tugas secara vertikal. Data tugas disimpan dalam bentuk `List<Map>` sehingga informasi seperti judul tugas, mata kuliah, dan deadline dapat ditampilkan secara dinamis ke dalam antarmuka aplikasi. Dengan penggunaan Flutter dan Dart, aplikasi dapat dibuat dengan tampilan modern, responsif, dan lebih mudah dikembangkan.
 
-## Task 2 MObile Flutter
+## Task 2 Mobile Flutter
 ### Source code
 
 ```
