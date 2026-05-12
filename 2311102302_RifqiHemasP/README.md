@@ -421,8 +421,7 @@ class DashboardPage extends StatelessWidget {
 }
 ```
 ---
-
-#Penjelaasan Program
+###Penjelaasan Program
 ### Rincian Komponen dan Logika Kode
 
 Untuk memahami lebih dalam bagaimana antarmuka ini dibangun, berikut adalah rincian fungsionalitas dari setiap komponen utama di dalam kode:
