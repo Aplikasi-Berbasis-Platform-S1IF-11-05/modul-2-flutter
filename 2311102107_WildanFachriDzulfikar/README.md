@@ -117,7 +117,7 @@ Gambar 2.3 Implementasi ListView
 
 Tampilan aplikasi dibuat menggunakan widget Card agar informasi tugas terlihat lebih modern dan rapi. Warna yang berbeda digunakan untuk membedakan tingkat prioritas tugas seperti pada Gambar 2.4,
 
-![Bukti](assets/AppBar.png)
+![Bukti](assets/Screenshot 2026-05-07 153917.png)
 
 Gambar 2.4 Tampilan Aplikasi sudah berjalan
 
