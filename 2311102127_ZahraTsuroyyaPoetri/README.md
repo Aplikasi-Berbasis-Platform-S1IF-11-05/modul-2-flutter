@@ -41,7 +41,7 @@ Dalam Flutter, tampilan aplikasi dibangun menggunakan widget. Widget merupakan k
 
 Flutter juga menyediakan berbagai widget layout seperti Column, Row, Container, GridView, dan ListView yang digunakan untuk mengatur posisi serta tampilan komponen aplikasi. Selain itu, Flutter mendukung fitur hot reload sehingga perubahan kode dapat langsung terlihat tanpa perlu menjalankan ulang aplikasi secara keseluruhan.
 
-## Tugas 2 - Flutter
+## Tugas 2 - Flutter (LMS)
 
 ### Source Code - main.dart
 
