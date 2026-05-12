@@ -48,7 +48,6 @@ Salah satu keunggulan Flutter adalah kemampuannya untuk merender tampilan secara
 
 Column adalah widget tata letak yang menyusun anak-anaknya secara vertikal. Ketika konten di dalam Column melebihi tinggi layar, maka perlu dibungkus dengan SingleChildScrollView agar konten dapat di-scroll oleh pengguna.
 
-Kombinasi antara Column dan SingleChildScrollView sering digunakan untuk membuat halaman yang memiliki beberapa bagian konten sekaligus, seperti grid di bagian atas dan list di bagian bawah.
 ---
 
 
@@ -727,3 +726,6 @@ Data tugas dikelola melalui model Task yang terpisah pada file task_model.dart. 
 
 
 # Output
+<img width="1397" height="886" alt="Screenshoot1" src="https://github.com/user-attachments/assets/2db3d92b-4b35-4537-b99e-107c2e3f2697" />
+
+
