@@ -67,8 +67,6 @@ GridView adalah widget di Flutter yang digunakan untuk menampilkan kumpulan item
 
 Terdapat beberapa varian GridView yang umum digunakan. `GridView.count` memungkinkan penentuan jumlah kolom secara langsung menggunakan parameter `crossAxisCount`. `GridView.builder` digunakan untuk membuat grid secara dinamis dan lebih efisien dalam hal penggunaan memori karena hanya merender item yang terlihat di layar. Pada tugas ini, GridView digunakan untuk menampilkan dua kartu tugas teratas yang paling mendekati deadline, sehingga mahasiswa langsung dapat melihat prioritas tugas utama mereka.
 
-
-
 ---
 
 # Studi Kasus
@@ -80,8 +78,6 @@ Tampilan tersebut menampilkan dua kartu tugas paling dekat deadlinenya di bagian
 ---
 
 # Task 2 — Mobile Flutter: GridView & ListView
-
-## Source Code Utama
 
 ### a. File Utama (`main.dart`)
 
