@@ -137,390 +137,346 @@ class TaskModel {
 ### c. File Layar Utama (`lms_screen.dart`)
 
 ```dart
+
+```
 import 'package:flutter/material.dart';
-import 'task_model.dart';
 
-class LmsScreen extends StatelessWidget {
-  const LmsScreen({super.key});
+void main() {
+  runApp(const MyApp());
+}
 
-  // Data dummy semua tugas
-  List<TaskModel> get allTasks => [
-        TaskModel(
-          taskName: 'Laporan Praktikum Laravel',
-          subject: 'Aplikasi Berbasis Platform',
-          deadline: '12 Mei 2026',
-          status: 'Belum Dikerjakan',
-          type: 'Laporan',
-          daysLeft: 1,
-        ),
-        TaskModel(
-          taskName: 'Quiz Bab 5 Jaringan',
-          subject: 'Jaringan Komputer',
-          deadline: '13 Mei 2026',
-          status: 'Belum Dikerjakan',
-          type: 'Quiz',
-          daysLeft: 2,
-        ),
-        TaskModel(
-          taskName: 'UTS Pemrograman Web',
-          subject: 'Pemrograman Web',
-          deadline: '15 Mei 2026',
-          status: 'Sedang Dikerjakan',
-          type: 'UTS',
-          daysLeft: 4,
-        ),
-        TaskModel(
-          taskName: 'Tugas Kalkulus Integral',
-          subject: 'Kalkulus',
-          deadline: '16 Mei 2026',
-          status: 'Belum Dikerjakan',
-          type: 'Tugas',
-          daysLeft: 5,
-        ),
-        TaskModel(
-          taskName: 'Presentasi Basis Data',
-          subject: 'Basis Data',
-          deadline: '17 Mei 2026',
-          status: 'Belum Dikerjakan',
-          type: 'Presentasi',
-          daysLeft: 6,
-        ),
-        TaskModel(
-          taskName: 'Resume Materi AI',
-          subject: 'Kecerdasan Buatan',
-          deadline: '18 Mei 2026',
-          status: 'Sudah Dikerjakan',
-          type: 'Resume',
-          daysLeft: 7,
-        ),
-        TaskModel(
-          taskName: 'Proyek Akhir Mobile',
-          subject: 'Pemrograman Mobile',
-          deadline: '20 Mei 2026',
-          status: 'Sedang Dikerjakan',
-          type: 'Proyek',
-          daysLeft: 9,
-        ),
-        TaskModel(
-          taskName: 'Laporan Algoritma',
-          subject: 'Desain & Analisis Algoritma',
-          deadline: '22 Mei 2026',
-          status: 'Belum Dikerjakan',
-          type: 'Laporan',
-          daysLeft: 11,
-        ),
-      ];
-
-  // 2 tugas terdekat untuk GridView
-  List<TaskModel> get urgentTasks => allTasks.take(2).toList();
-
-  // 8 tugas berikutnya untuk ListView
-  List<TaskModel> get listTasks => allTasks.skip(2).take(8).toList();
-
-  Color _statusColor(String status) {
-    switch (status) {
-      case 'Sudah Dikerjakan':
-        return Colors.green;
-      case 'Sedang Dikerjakan':
-        return Colors.orange;
-      default:
-        return Colors.red;
-    }
-  }
-
-  Color _typeColor(String type) {
-    switch (type) {
-      case 'UTS':
-      case 'Quiz':
-        return const Color(0xFFE53935);
-      case 'Proyek':
-        return const Color(0xFF8E24AA);
-      case 'Presentasi':
-        return const Color(0xFF039BE5);
-      default:
-        return const Color(0xFF1A73E8);
-    }
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'LMS Telkom University',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: const DashboardPage(),
+    );
+  }
+}
+
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    // DATA GRID (2 tugas terdekat deadline)
+    final List<Map<String, dynamic>> priorityTasks = [
+      {
+        "title": "Tugas Flutter Mobile",
+        "course": "Pemrograman Mobile",
+        "deadline": "10 Mei 2026",
+        "icon": Icons.phone_android,
+        "color": Colors.redAccent,
+      },
+      {
+        "title": "Laporan Big Data",
+        "course": "Big Data",
+        "deadline": "11 Mei 2026",
+        "icon": Icons.storage,
+        "color": Colors.orange,
+      },
+    ];
+
+    // DATA LIST VIEW
+    final List<Map<String, dynamic>> taskList = [
+      {
+        "title": "TUBES Web",
+        "course": "Pemrograman Web",
+        "deadline": "15 Mei 2026",
+        "detail": "Deadline jam 23:59"
+      },
+      {
+        "title": "Quiz AI",
+        "course": "Artificial Intelligence",
+        "deadline": "16 Mei 2026",
+        "detail": "Kerjakan di LMS"
+      },
+      {
+        "title": "Tugas Basis Data",
+        "course": "Sistem Basis Data",
+        "deadline": "17 Mei 2026",
+        "detail": "Upload PDF"
+      },
+      {
+        "title": "Tugas Machine Learning",
+        "course": "Machine Learning",
+        "deadline": "18 Mei 2026",
+        "detail": "Individual"
+      },
+      {
+        "title": "Laporan Jaringan",
+        "course": "Networking",
+        "deadline": "19 Mei 2026",
+        "detail": "Format DOCX"
+      },
+      {
+        "title": "Project UI UX",
+        "course": "UI UX Design",
+        "deadline": "20 Mei 2026",
+        "detail": "Upload Figma"
+      },
+      {
+        "title": "Tugas Cloud",
+        "course": "Cloud Computing",
+        "deadline": "21 Mei 2026",
+        "detail": "Buat deployment"
+      },
+      {
+        "title": "Resume Seminar",
+        "course": "Seminar IT",
+        "deadline": "22 Mei 2026",
+        "detail": "Minimal 2 halaman"
+      },
+    ];
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F4F9),
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A73E8),
+        backgroundColor: Colors.red,
         title: const Text(
-          '📚 LMS Kampus',
+          "Dashboard LMS",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Colors.white),
-            onPressed: () {},
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 12),
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Text(
-                'AA',
-                style: TextStyle(
-                  color: Color(0xFF1A73E8),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
-      body: Padding(
+
+      // PAKAI LISTVIEW BUILDER
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header Selamat Datang
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF1A73E8), Color(0xFF42A5F5)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Halo, Amelia! 👋',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Kamu memiliki tugas yang mendekati deadline.',
-                    style: TextStyle(color: Colors.white70, fontSize: 13),
-                  ),
-                ],
-              ),
+        children: [
+
+          // HEADER
+          const Text(
+            "Deadline Terdekat",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
+          ),
 
-            const SizedBox(height: 20),
+          const SizedBox(height: 15),
 
-            // Judul Grid
-            const Text(
-              '🔥 Tugas Paling Dekat Deadline',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF1A237E),
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            // GRIDVIEW — 2 tugas terdekat
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
+          // GRID VIEW
+          SizedBox(
+            height: 220,
+            child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: 1.1,
-              children: urgentTasks.map((task) {
-                return Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+              itemCount: priorityTasks.length,
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.9,
+              ),
+              itemBuilder: (context, index) {
+                final task = priorityTasks[index];
+
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: task["color"],
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 5,
+                        offset: const Offset(2, 3),
+                      ),
+                    ],
                   ),
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: _typeColor(task.type).withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        task["icon"],
+                        size: 40,
+                        color: Colors.white,
+                      ),
+
+                      Text(
+                        task["title"],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      Text(
+                        task["course"],
+                        style: const TextStyle(
+                          color: Colors.white70,
+                        ),
+                      ),
+
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.access_time,
+                            color: Colors.white,
+                            size: 18,
                           ),
-                          child: Text(
-                            task.type,
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              color: _typeColor(task.type),
+                          const SizedBox(width: 5),
+                          Text(
+                            task["deadline"],
+                            style: const TextStyle(
+                              color: Colors.white,
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          task.taskName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          task.subject,
-                          style: const TextStyle(
-                            fontSize: 11,
-                            color: Colors.grey,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const Spacer(),
-                        Row(
-                          children: [
-                            const Icon(Icons.access_time,
-                                size: 12, color: Colors.red),
-                            const SizedBox(width: 4),
-                            Text(
-                              '${task.daysLeft} hari lagi',
-                              style: const TextStyle(
-                                fontSize: 11,
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ],
+                      )
+                    ],
                   ),
                 );
-              }).toList(),
+              },
             ),
+          ),
 
-            const SizedBox(height: 20),
+          const SizedBox(height: 20),
 
-            // Judul ListView
-            const Text(
-              '📋 Daftar Tugas Lainnya',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF1A237E),
-              ),
+          const Text(
+            "Daftar Tugas",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 10),
+          ),
 
-            // LISTVIEW.SEPARATED — 8 tugas berikutnya
-            Expanded(
-              child: ListView.separated(
-                itemCount: listTasks.length,
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  final task = listTasks[index];
-                  return Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+          const SizedBox(height: 10),
+
+          // LIST VIEW BUILDER
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: taskList.length,
+            separatorBuilder: (context, index) =>
+                const SizedBox(height: 10),
+            itemBuilder: (context, index) {
+              final task = taskList[index];
+
+              return Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.08),
+                      blurRadius: 4,
+                      offset: const Offset(1, 2),
                     ),
-                    color: Colors.white,
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      leading: CircleAvatar(
-                        backgroundColor:
-                            _typeColor(task.type).withOpacity(0.15),
-                        child: Text(
-                          task.type[0],
-                          style: TextStyle(
-                            color: _typeColor(task.type),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+
+                    // ICON
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.red[100],
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      title: Text(
-                        task.taskName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
+                      child: const Icon(
+                        Icons.assignment,
+                        color: Colors.red,
                       ),
-                      subtitle: Column(
+                    ),
+
+                    const SizedBox(width: 15),
+
+                    // TEXT
+                    Expanded(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 4),
                           Text(
-                            task.subject,
+                            task["title"],
                             style: const TextStyle(
-                                fontSize: 12, color: Colors.grey),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          const SizedBox(height: 2),
+
+                          const SizedBox(height: 4),
+
+                          Text(
+                            task["course"],
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                            ),
+                          ),
+
+                          const SizedBox(height: 6),
+
                           Row(
                             children: [
-                              const Icon(Icons.calendar_today,
-                                  size: 11, color: Colors.grey),
-                              const SizedBox(width: 4),
+                              const Icon(
+                                Icons.calendar_today,
+                                size: 16,
+                                color: Colors.grey,
+                              ),
+
+                              const SizedBox(width: 5),
+
                               Text(
-                                'Deadline: ${task.deadline}',
+                                task["deadline"],
                                 style: const TextStyle(
-                                    fontSize: 11, color: Colors.grey),
+                                  color: Colors.grey,
+                                ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color:
-                                  _statusColor(task.status).withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(
-                              task.status,
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: _statusColor(task.status),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
+
+                          const SizedBox(height: 5),
+
                           Text(
-                            '${task.daysLeft} hari lagi',
+                            task["detail"],
                             style: const TextStyle(
-                              fontSize: 11,
-                              color: Colors.grey,
+                              color: Colors.black54,
                             ),
                           ),
                         ],
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+
+                    // BUTTON
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        "Open",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
 }
-```
+
 
 ---
 
