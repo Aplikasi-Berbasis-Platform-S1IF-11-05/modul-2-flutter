@@ -35,7 +35,7 @@
 
 ---
 
-# 📚 Dasar Teori
+# Dasar Teori
 
 ## 1. Flutter
 
@@ -113,7 +113,7 @@ AppBar adalah bilah navigasi yang berada di bagian atas halaman, biasanya berisi
 
 ---
 
-# 💻 Studi Kasus
+# Studi Kasus
 
 Aplikasi ini merupakan simulasi tampilan halaman dasbor LMS (Learning Management System) Telkom University berbasis mobile menggunakan Flutter. Dasbor menampilkan dua tugas dengan deadline terdekat dalam format grid dua kolom di bagian atas, serta delapan daftar tugas lainnya dalam format list di bawahnya.
 
@@ -121,7 +121,7 @@ Setiap item pada grid menampilkan judul tugas, nama mata kuliah, dan tenggat wak
 
 ---
 
-# 💻 Tugas — Mobile Flutter (LMS Dashboard)
+# Tugas — Mobile Flutter (LMS Dashboard)
 
 ## Source Code Utama
 
@@ -576,7 +576,7 @@ class LMSPage extends StatelessWidget {
 
 ---
 
-# 🧠 Penjelasan Program
+# Penjelasan Program
 
 Aplikasi ini dibangun menggunakan Flutter dengan pendekatan StatelessWidget karena data yang ditampilkan bersifat statis dan tidak memerlukan pembaruan dinamis selama runtime.
 
@@ -588,7 +588,7 @@ Secara keseluruhan, penggunaan `GridView.builder` dan `ListView.separated` menja
 
 ---
 
-# 🚀 Cara Menjalankan Program
+# Cara Menjalankan Program
 
 1. Pastikan Flutter SDK sudah terinstall di perangkat
 2. Buka folder project Flutter di terminal
@@ -601,8 +601,17 @@ Secara keseluruhan, penggunaan `GridView.builder` dan `ListView.separated` menja
 
 ---
 
-# 📸 Output
+# Output
 
 Aplikasi menampilkan dasbor LMS, Bagian atas berisi header kartu merah bergradient dan menu navigasi, diikuti grid dua kolom untuk tugas deadline terdekat, serta daftar tugas lengkap di bawahnya.
+1. Tampilan Mobile Android
 
-*(Screenshot dapat ditambahkan di sini setelah menjalankan aplikasi)*
+   <img width="1598" height="899" alt="SS1_TampilanAndroid" src="https://github.com/user-attachments/assets/f4c8fa4d-f905-4264-9f2f-15579e6834fd" />
+
+3. Tampilan Chrome
+   <img width="1553" height="861" alt="SS2_TampilanChromeLMS" src="https://github.com/user-attachments/assets/047b5e73-1002-42a4-bda1-ee7d3a1e42c9" />
+
+
+
+
+
