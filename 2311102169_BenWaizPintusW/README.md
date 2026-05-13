@@ -1,0 +1,380 @@
+<div align="center">
+  <br />
+  <h1>LAPORAN PRAKTIKUM <br> APLIKASI BERBASIS PLATFORM </h1>
+  <br />
+  <h3>MODUL 2 <br> FLUTTER </h3>
+  <br />
+  <img width="512" height="512" alt="telyu" src="https://github.com/user-attachments/assets/724a3291-bcf9-448d-a395-3886a8659d79" />
+  <br />
+  <br />
+  <br />
+  <h3>Disusun Oleh :</h3>
+  <p>
+    <strong>Ben Waiz Pintus Widyosaputro</strong>
+    <br>
+    <strong>2311102169</strong>
+    <br>
+    <strong>S1 IF-11-REG05</strong>
+  </p>
+  <br />
+  <h3>Dosen Pengampu :</h3>
+  <p>
+    <strong>Dedi Agung Prabowo, S.Kom., M.Kom</strong>
+  </p>
+  <br />
+  <br />
+  <h4>Asisten Praktikum :</h4>
+  <strong>Apri Pandu Wicaksono </strong>
+  <br>
+  <strong>Hamka Zaenul Ardi</strong>
+  <br />
+  <h3>LABORATORIUM HIGH PERFORMANCE <br>FAKULTAS INFORMATIKA <br>UNIVERSITAS TELKOM PURWOKERTO <br>2026 </h3>
+</div>
+
+<hr>
+
+
+# Dasar Teori
+
+<p align="justify">
+Flutter adalah open-source UI software development kit (SDK) yang dikembangkan oleh Google untuk membangun aplikasi yang dikompilasi secara native pada berbagai platform, seperti Android, iOS, Web, dan Desktop, hanya dengan menggunakan satu basis kode (single codebase). Framework ini menggunakan bahasa pemrograman Dart dan mengusung filosofi "Everything is a Widget", di mana seluruh elemen antarmuka pengguna—mulai dari struktur tata letak, tombol, hingga dekorasi teks—direpresentasikan sebagai komponen widget yang disusun secara hierarkis dalam sebuah widget tree.
+</p>
+
+<p align="justify">
+Secara arsitektur, Flutter merender seluruh komponen visualnya secara mandiri menggunakan rendering engine miliknya sendiri (seperti Impeller atau Skia) tanpa bergantung pada komponen bawaan sistem operasi, sehingga mampu menghasilkan performa tinggi yang konsisten hingga 60-120 fps. Selain itu, Flutter menawarkan efisiensi tinggi bagi developer melalui fitur Hot Reload yang memanfaatkan kompilasi Just-In-Time (JIT) untuk melihat perubahan kode secara instan selama proses pengembangan, serta kompilasi Ahead-Of-Time (AOT) untuk menghasilkan performa kode mesin yang cepat dan mulus saat aplikasi dirilis ke publik.
+</p>
+
+# Tugas 2 - Mobile Flutter
+
+<p align="justify">
+Kalian diminta untuk membuat tampilan mirip lms web kampus dimana terdapat 2 grid kanan kiri yang berisikan tugas mata kuliah yang paling mendekati dengan deadline, dan di bawah nya menampilkan 8 list view yang berisikan list tugas (diluar yang dari 2 grid tadi) berisikan nama tugas, mata kuliah apa, deadline, dan data tambahan lain nya.
+
+Ketentuan:
+- Menggunakan GridView untuk tampilan grid kanan dan kiri
+- Menggunakan ListView (boleh dengan builder boleh dengan separated, tapi ga boleh yang biasa)
+</p>
+
+## 1. Source Code main.dart
+```
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  final List<Map<String, dynamic>> urgentTasks = const [
+    {
+      'title': 'Tugas Flutter',
+      'course': 'Mobile Programming',
+      'deadline': '12 Mei 2026',
+      'time': '2 Jam Lagi',
+      'color': Colors.red,
+    },
+    {
+      'title': 'Laporan AI',
+      'course': 'Artificial Intelligence',
+      'deadline': '13 Mei 2026',
+      'time': '1 Hari Lagi',
+      'color': Colors.orange,
+    },
+  ];
+
+  final List<Map<String, String>> taskList = const [
+    {
+      'title': 'Quiz Basis Data',
+      'course': 'Basis Data',
+      'deadline': '15 Mei 2026',
+      'room': 'Lab 2',
+    },
+    {
+      'title': 'Makalah Jaringan',
+      'course': 'Jaringan Komputer',
+      'deadline': '16 Mei 2026',
+      'room': 'Ruang A1',
+    },
+    {
+      'title': 'UI Design',
+      'course': 'IMK',
+      'deadline': '17 Mei 2026',
+      'room': 'Online',
+    },
+    {
+      'title': 'Mini Project',
+      'course': 'Pemrograman Web',
+      'deadline': '18 Mei 2026',
+      'room': 'Lab Web',
+    },
+    {
+      'title': 'Resume Video',
+      'course': 'Multimedia',
+      'deadline': '19 Mei 2026',
+      'room': 'Ruang B2',
+    },
+    {
+      'title': 'Analisis Jurnal',
+      'course': 'Metopen',
+      'deadline': '20 Mei 2026',
+      'room': 'Online',
+    },
+    {
+      'title': 'ERD Sistem',
+      'course': 'SI',
+      'deadline': '21 Mei 2026',
+      'room': 'Lab 3',
+    },
+    {
+      'title': 'Kriptografi',
+      'course': 'Keamanan Data',
+      'deadline': '22 Mei 2026',
+      'room': 'Ruang C1',
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isSmall = size.width < 380;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F7FB),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.blue,
+        title: Text(
+          'LMS Kampus',
+          style: TextStyle(
+            fontSize: isSmall ? 18 : 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(isSmall ? 12 : 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Deadline Terdekat',
+              style: TextStyle(
+                fontSize: isSmall ? 18 : 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            SizedBox(height: isSmall ? 10 : 16),
+
+            SizedBox(
+              height: isSmall ? 170 : 200,
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: urgentTasks.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: isSmall ? 8 : 12,
+                  mainAxisSpacing: isSmall ? 8 : 12,
+                  childAspectRatio: isSmall ? 0.85 : 1,
+                ),
+                itemBuilder: (context, index) {
+                  final task = urgentTasks[index];
+
+                  return Container(
+                    padding: EdgeInsets.all(isSmall ? 10 : 14),
+                    decoration: BoxDecoration(
+                      color: task['color'],
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          task['course'],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: isSmall ? 10 : 12,
+                          ),
+                        ),
+
+                        SizedBox(height: isSmall ? 8 : 12),
+
+                        Text(
+                          task['title'],
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: isSmall ? 14 : 18,
+                          ),
+                        ),
+
+                        const Spacer(),
+
+                        Text(
+                          task['deadline'],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: isSmall ? 10 : 12,
+                          ),
+                        ),
+
+                        SizedBox(height: isSmall ? 6 : 8),
+
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: isSmall ? 8 : 10,
+                            vertical: isSmall ? 4 : 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            task['time'],
+                            style: TextStyle(
+                              color: task['color'],
+                              fontWeight: FontWeight.bold,
+                              fontSize: isSmall ? 10 : 12,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            SizedBox(height: isSmall ? 12 : 20),
+
+            Text(
+              'Daftar Tugas',
+              style: TextStyle(
+                fontSize: isSmall ? 18 : 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            SizedBox(height: isSmall ? 10 : 16),
+
+            Expanded(
+              child: ListView.separated(
+                itemCount: taskList.length,
+                separatorBuilder: (_, __) =>
+                    SizedBox(height: isSmall ? 8 : 12),
+                itemBuilder: (context, index) {
+                  final task = taskList[index];
+
+                  return Container(
+                    padding: EdgeInsets.all(isSmall ? 10 : 14),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Colors.black12,
+                          offset: Offset(0, 2),
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: isSmall ? 18 : 22,
+                          backgroundColor: Colors.blue,
+                          child: Text(
+                            '${index + 1}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: isSmall ? 12 : 14,
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(width: isSmall ? 10 : 14),
+
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                task['title']!,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: isSmall ? 13 : 16,
+                                ),
+                              ),
+
+                              SizedBox(height: isSmall ? 4 : 6),
+
+                              Text(
+                                'Matkul : ${task['course']}',
+                                style: TextStyle(
+                                  fontSize: isSmall ? 11 : 13,
+                                  color: Colors.black87,
+                                ),
+                              ),
+
+                              Text(
+                                'Deadline : ${task['deadline']}',
+                                style: TextStyle(
+                                  fontSize: isSmall ? 11 : 13,
+                                  color: Colors.black87,
+                                ),
+                              ),
+
+                              Text(
+                                'Ruangan : ${task['room']}',
+                                style: TextStyle(
+                                  fontSize: isSmall ? 11 : 13,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: isSmall ? 14 : 18,
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+# Penjelasan
+<p align="justify">
+Kode di atas merupakan implementasi aplikasi Flutter berbasis StatelessWidget bernama LMS Kampus yang berfungsi untuk menampilkan manajemen tugas kuliah secara responsif menggunakan penyesuaian ukuran berbasis MediaQuery. Struktur antarmuka aplikasi ini dibangun di dalam sebuah Scaffold dengan latar belakang abu-abu terang, yang membagi konten utamanya menjadi dua bagian: bagian atas menampilkan kartu tenggat waktu darurat secara berdampingan menggunakan GridView.builder statis dari data urgentTasks, sementara bagian bawah menampilkan daftar seluruh tugas akademik secara vertikal menggunakan ListView.separated yang dinamis berdasarkan data taskList. Setiap baris tugas pada daftar tersebut dikemas dalam bentuk kontainer putih berbayang (box shadow) yang rapi, lengkap dengan indikator nomor berbasis CircleAvatar, detail teks informasi mata kuliah, tenggat waktu, ruangan, serta diakhiri dengan ikon panah navigasi (arrow_forward_ios) di sisi kanan.
+</p>
+
+# Output
+![alt text](pic.png)
